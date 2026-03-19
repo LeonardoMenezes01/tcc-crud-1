@@ -3,6 +3,12 @@ const app = express()
 const db = require("./db")
 const cors = require("cors")
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json"); // Verifique se o nome do arquivo está idêntico (minúsculas/maiúsculas)
+
+// ... depois do app = express()
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(express.json())
 app.use(cors())
 
@@ -76,6 +82,6 @@ app.delete("/usuarios/:id",(req,res)=>{
 
 })
 
-app.listen(3000,()=>{
-    console.log("Servidor rodando")
-})
+app.listen(3000, () => {
+    console.log("Servidor rodando na porta 3000");
+});
